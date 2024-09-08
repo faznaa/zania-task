@@ -6,6 +6,13 @@ I've also created the backend functionalities, but its in nextjs apis iteself. y
 
 ## Getting Started
 
+Get the mongodb uri from mongodb.
+Create a .env.local file and add it there as shown in .env.example 
+
+```
+MONGODB_URI='YOUR_MONGODB_URI'
+```
+
 Get started by installing the required packages and then starting the server using the following commands.
 
 ```bash
@@ -38,5 +45,7 @@ This feature is done with the help of library [react-dnd](https://react-dnd.gith
 - POST will save the data to mongo
 - GET will check if data exist , if not, it will save the dummy data. If data exists, it will return the data.
 - No authentications have been added to the apis for now.
+- DB used is mongodb
 
+ 
 
