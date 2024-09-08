@@ -4,6 +4,8 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CustomImage from "./CustomImage";
 import Modal from "./Modal";
+import useAutoSave from "@/hooks/useAutoSave";
+import Spinner from "./Spinner";
 
 const ItemTypes = {
   CARD: "card",
@@ -55,22 +57,33 @@ function Card({ item, index, moveCard }: any) {
 }
 
 export default function DragDrop() {
-  const [items, setItems] = useState(sampleData);
-
-  const moveCard = useCallback(
-    (fromIndex: number, toIndex: number) => {
-      const updatedItems = [...items];
-      const [movedItem] = updatedItems.splice(fromIndex, 1);
-      updatedItems.splice(toIndex, 0, movedItem);
-      setItems(updatedItems);
-    },
-    [items]
-  );
+    const { items, setItems, lastSaved, isSaving } = useAutoSave('/api/cats'); 
+    const moveCard = useCallback(
+        (fromIndex: number, toIndex: number) => {
+          const updatedItems = [...items];
+          const [movedItem] = updatedItems.splice(fromIndex, 1);
+          updatedItems.splice(toIndex, 0, movedItem);
+      
+          const reorderedItems = updatedItems.map((item, index) => ({
+            ...item,
+            position: index,
+          }));
+      
+          setItems(reorderedItems);
+        },
+        [items]
+      );
 
   return (
     <DndProvider backend={HTML5Backend}>
+        <div className="w-full flex justify-start text-gray-200 text-lg my-5">
+        {lastSaved && (
+             <span>Last saved {lastSaved}</span>
+        )}
+        {isSaving && <Spinner className="border-white"/> }
+        </div>
       <div className="grid grid-cols-3 gap-6">
-        {items.map((item, index) => (
+        {items.map((item:any, index:number) => (
           <Card
             key={item.title}
             index={index}

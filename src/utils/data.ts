@@ -6,6 +6,10 @@ const sampleData = [
   { type: "bill-of-lading-2", title: "Bill of Lading 2", position: 4,img:'https://images4.alphacoders.com/134/1344206.jpeg' },
 ];
 
+const sortData = (data: any) => {
+    return data.sort((a: any, b: any) => a.position - b.position);
+}
+
 export {
-    sampleData
+    sampleData,sortData
 }
