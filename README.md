@@ -49,3 +49,11 @@ This feature is done with the help of library [react-dnd](https://react-dnd.gith
 
  
 
+
+### Approach
+
+- I felt that drag n drop feature will be the toughest as I've experience in every other part. I searched a bit and found react-dnd, which i was abele to modify for our need.
+- After it worked, i started on the simple tasks such as overlay, loading, esc button etc.
+Then I looked at the server , but i felt that using nextjs api will be much more easier than creating custom server. So I created that, and then went on with the auto save part.
+- Keeping auto save part logic separate from the component is better. So i started with that and moved items, and other state variables to the auto save hook .
+- Deployed the app using netlify
