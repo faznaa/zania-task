@@ -83,7 +83,10 @@ export default function Task() {
         return;
     }
     const lastTask = tasks.at(tasks.length -1)
-    if(!lastTask || !lastTask.id) return;
+    if(!lastTask || !lastTask.id){
+        alert('Cant get last task id')
+        return
+    }
     setTasks([...tasks,{
         ...inputTask,
         status:'pending',
@@ -100,13 +103,13 @@ export default function Task() {
     setTasks(_tasks)
   }
   const handleSearch = () => {
-    const _tasks = tasks.filter(_task => _task.category.toLowerCase() == searchWord)
+    const _tasks = tasks.filter(_task => _task.category.toLowerCase() == searchWord.toLowerCase())
     setFilteredTasks(_tasks)
 
   }
   useEffect(() => {
     if(tasks) {
-        setFilteredTasks(filteredTasks)
+        setFilteredTasks(tasks)
     }
   },[tasks])
 
@@ -131,7 +134,7 @@ export default function Task() {
             <input className="" onChange={(e) => handleInputTask('title',e)} placeholder="Title"/>
             <input className="" onChange={(e) => handleInputTask('description',e)}  placeholder="Description"/>
             <input className="" onChange={(e) => handleInputTask('category',e)}  placeholder="Category"/>
-            <div className="flex my-4 gap-x-6">
+            <div className="flex my-4 gap-x-6 text-gray-300">
             <button className="px-2 bg-gray-800" onClick={() => handleAdd()}>Add</button>
             <button className="px-2 bg-gray-800">Cancel</button>
             </div>
